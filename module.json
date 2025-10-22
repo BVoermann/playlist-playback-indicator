@@ -1,0 +1,33 @@
+{
+  "id": "playlist-playback-indicator",
+  "title": "Playlist Playback Indicator",
+  "description": "Adds a progress bar (playback seeker) to each sound in the playlist directory to visualize and control playback position.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Your Name",
+      "url": "https://github.com/yourusername",
+      "discord": "YourDiscord#0000"
+    }
+  ],
+  "compatibility": {
+    "minimum": "11",
+    "verified": "13",
+    "maximum": "13"
+  },
+  "esmodules": [
+    "scripts/playback-indicator.js"
+  ],
+  "styles": [
+    "styles/playback-indicator.css"
+  ],
+  "packs": [],
+  "languages": [],
+  "relationships": {
+    "requires": []
+  },
+  "manifest": "https://yourdomain.com/modules/playlist-playback-indicator/module.json",
+  "download": "https://yourdomain.com/modules/playlist-playback-indicator/playlist-playback-indicator.zip",
+  "license": "MIT",
+  "readme": "https://yourdomain.com/modules/playlist-playback-indicator/README.md"
+}

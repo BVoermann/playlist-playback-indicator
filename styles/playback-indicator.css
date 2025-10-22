@@ -1,0 +1,12 @@
+.jenny-controls {
+  margin-top: 4px;
+  width: 100%;
+  align-items: center;
+}
+
+.jenny-controls input[type="range"] {
+  flex-grow: 1;
+  accent-color: var(--color-primary);
+  height: 6px;
+  border-radius: 4px;
+}
