@@ -5,9 +5,8 @@
   "version": "1.0.0",
   "authors": [
     {
-      "name": "Your Name",
-      "url": "https://github.com/yourusername",
-      "discord": "YourDiscord#0000"
+      "name": "BVoermann",
+      "url": "https://github.com/BVoermann",
     }
   ],
   "compatibility": {
@@ -26,8 +25,6 @@
   "relationships": {
     "requires": []
   },
-  "manifest": "https://yourdomain.com/modules/playlist-playback-indicator/module.json",
-  "download": "https://yourdomain.com/modules/playlist-playback-indicator/playlist-playback-indicator.zip",
-  "license": "MIT",
-  "readme": "https://yourdomain.com/modules/playlist-playback-indicator/README.md"
+  "manifest": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/module.json",
+  "readme": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/README.md"
 }
