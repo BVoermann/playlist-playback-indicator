@@ -130,12 +130,16 @@ function handleDirectory(app, html, data) {
 
           // Continue animation loop if:
           // 1. Sound is playing, OR
-          // 2. We don't have the correct duration yet
-          const needsUpdate = playlistSound.playing || (snd && (!snd.duration || seeker.max < snd.duration || seeker.max === 100));
+          // 2. We don't have the sound object yet, OR
+          // 3. We don't have the correct duration yet
+          const hasDuration = snd && typeof snd.duration === "number" && snd.duration > 0 && seeker.max === snd.duration;
+          const needsUpdate = playlistSound.playing || !snd || !hasDuration;
+
           if (needsUpdate) {
             animationFrames[sid] = requestAnimationFrame(liveUpdate);
           } else {
             // Clear animation frame reference when stopped and duration is set
+            console.log("Playlist Playback Indicator | Stopping animation loop for sound:", sid, "- duration is set to", seeker.max);
             delete animationFrames[sid];
           }
         }
