@@ -2,11 +2,11 @@ const controls = {};
 const animationFrames = {};
 
 function handleDirectory(app, html, data) {
-  // `app` is the Application (PlaylistDirectory), `html` is the jQuery-wrapped HTML, `data` is the data context
+  // `app` is the Application (PlaylistDirectory), `html` is the HTMLElement (no longer jQuery in v13), `data` is the data context
   // Only run this logic for a PlaylistDirectory
   if (app instanceof PlaylistDirectory) {
     // Find sound elements in "currently playing" area
-    const sounds = Array.from(html[0].querySelectorAll(".playlist-sounds .sound")).map(element => {
+    const sounds = Array.from(html.querySelectorAll(".playlist-sounds .sound")).map(element => {
       const playlistId = element.dataset.playlistId;
       const soundId = element.dataset.soundId;
       const playlist = game.playlists.get(playlistId);
