@@ -62,11 +62,17 @@ function handleDirectory(app, html, data) {
 
         // Set initial max value from sound duration if available
         const snd = playlistSound.sound;
+        console.log("Playlist Playback Indicator | Sound object:", snd);
+        console.log("Playlist Playback Indicator | Initial duration:", snd?.duration);
+        console.log("Playlist Playback Indicator | Initial currentTime:", snd?.currentTime);
+
         if (snd && typeof snd.duration === "number" && snd.duration > 0) {
           seeker.max = snd.duration;
+          console.log("Playlist Playback Indicator | Set seeker.max to:", seeker.max);
         } else {
           // Default to a reasonable value that will be updated later
           seeker.max = 100;
+          console.log("Playlist Playback Indicator | Duration not available, defaulting to 100");
         }
 
         // Set initial value from current time if available
@@ -111,6 +117,7 @@ function handleDirectory(app, html, data) {
 
           // Always update duration if available and not set correctly
           if (snd && typeof snd.duration === "number" && snd.duration > 0 && seeker.max !== snd.duration) {
+            console.log("Playlist Playback Indicator | Updating seeker.max from", seeker.max, "to", snd.duration);
             seeker.max = snd.duration;
           }
 
@@ -119,10 +126,16 @@ function handleDirectory(app, html, data) {
             if (snd && typeof snd.currentTime === "number") {
               seeker.value = snd.currentTime;
             }
-            // Continue animation only while playing
+          }
+
+          // Continue animation loop if:
+          // 1. Sound is playing, OR
+          // 2. We don't have the correct duration yet
+          const needsUpdate = playlistSound.playing || (snd && (!snd.duration || seeker.max < snd.duration || seeker.max === 100));
+          if (needsUpdate) {
             animationFrames[sid] = requestAnimationFrame(liveUpdate);
           } else {
-            // Clear animation frame reference when stopped
+            // Clear animation frame reference when stopped and duration is set
             delete animationFrames[sid];
           }
         }
