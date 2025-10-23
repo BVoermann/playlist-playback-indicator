@@ -1,12 +1,23 @@
+console.log("Playlist Playback Indicator | Module loaded");
+
 const controls = {};
 const animationFrames = {};
 
 function handleDirectory(app, html, data) {
+  console.log("Playlist Playback Indicator | Hook triggered", {app, html, data});
+
   // `app` is the Application (PlaylistDirectory), `html` is the HTMLElement (no longer jQuery in v13), `data` is the data context
   // Only run this logic for a PlaylistDirectory
   if (app instanceof PlaylistDirectory) {
+    console.log("Playlist Playback Indicator | App is PlaylistDirectory");
     // Find sound elements in "currently playing" area
-    const sounds = Array.from(html.querySelectorAll(".playlist-sounds .sound")).map(element => {
+    console.log("Playlist Playback Indicator | HTML element:", html);
+    console.log("Playlist Playback Indicator | HTML innerHTML preview:", html.innerHTML.substring(0, 500));
+
+    const soundElements = html.querySelectorAll(".playlist-sounds .sound");
+    console.log("Playlist Playback Indicator | Found sound elements:", soundElements.length, soundElements);
+
+    const sounds = Array.from(soundElements).map(element => {
       const playlistId = element.dataset.playlistId;
       const soundId = element.dataset.soundId;
       const playlist = game.playlists.get(playlistId);
@@ -15,6 +26,8 @@ function handleDirectory(app, html, data) {
       if (!playlistSound) return null;
       return { element, playlistSound };
     }).filter(s => s);
+
+    console.log("Playlist Playback Indicator | Valid sounds found:", sounds.length, sounds);
 
     // Track which sounds are currently present
     const currentSoundIds = new Set(sounds.map(s => s.playlistSound.id));
@@ -38,6 +51,7 @@ function handleDirectory(app, html, data) {
     for (const { element, playlistSound } of sounds) {
       const sid = playlistSound.id;
       if (!controls[sid]) {
+        console.log("Playlist Playback Indicator | Creating controls for sound:", sid);
         const newRow = document.createElement("div");
         newRow.classList.add("jenny-controls", "flexrow");
 
@@ -100,10 +114,13 @@ function handleDirectory(app, html, data) {
         controls[sid] = newRow;
       }
 
+      console.log("Playlist Playback Indicator | Appending controls to element:", element);
       element.appendChild(controls[playlistSound.id]);
     }
   }
 }
+
+console.log("Playlist Playback Indicator | Registering hook");
 
 // Hook into rendering of PlaylistDirectory
 Hooks.on("renderPlaylistDirectory", handleDirectory);
