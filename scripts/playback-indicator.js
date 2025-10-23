@@ -60,6 +60,22 @@ function handleDirectory(app, html, data) {
         seeker.min = 0;
         seeker.step = 0.05;
 
+        // Set initial max value from sound duration if available
+        const snd = playlistSound.sound;
+        if (snd && typeof snd.duration === "number" && snd.duration > 0) {
+          seeker.max = snd.duration;
+        } else {
+          // Default to a reasonable value that will be updated later
+          seeker.max = 100;
+        }
+
+        // Set initial value from current time if available
+        if (snd && typeof snd.currentTime === "number") {
+          seeker.value = snd.currentTime;
+        } else {
+          seeker.value = playlistSound.pausedTime || 0;
+        }
+
         // When slider is changed, seek
         let updating = false;
         seeker.addEventListener("input", async (event) => {
@@ -91,14 +107,17 @@ function handleDirectory(app, html, data) {
         newRow.appendChild(seeker);
 
         function liveUpdate() {
-          // Only update if actually playing
+          const snd = playlistSound.sound;
+
+          // Always update duration if available and not set correctly
+          if (snd && typeof snd.duration === "number" && snd.duration > 0 && seeker.max !== snd.duration) {
+            seeker.max = snd.duration;
+          }
+
+          // Only update position if actually playing
           if (playlistSound.playing && !updating) {
-            const snd = playlistSound.sound;
             if (snd && typeof snd.currentTime === "number") {
               seeker.value = snd.currentTime;
-            }
-            if (snd && typeof snd.duration === "number") {
-              seeker.max = snd.duration;
             }
             // Continue animation only while playing
             animationFrames[sid] = requestAnimationFrame(liveUpdate);
