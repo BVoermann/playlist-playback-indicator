@@ -1,7 +1,7 @@
 {
   "id": "playlist-playback-indicator",
   "title": "Playlist Playback Indicator",
-  "description": "Adds a progress bar (playback seeker) to each sound in the playlist directory to visualize and control playback position.",
+  "description": "Adds a progress bar to each sound in the playlist directory to visualize and control playback position.",
   "version": "1.0.0",
   "authors": [
     {
