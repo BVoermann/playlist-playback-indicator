@@ -6,7 +6,7 @@
   "authors": [
     {
       "name": "BVoermann",
-      "url": "https://github.com/BVoermann",
+      "url": "https://github.com/BVoermann"
     }
   ],
   "compatibility": {
@@ -25,6 +25,6 @@
   "relationships": {
     "requires": []
   },
-  "manifest": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/module.json",
-  "readme": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/README.md"
+  "manifest": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/main/module.json",
+  "readme": "https://raw.githubusercontent.com/BVoermann/playlist-playback-indicator/main/README.md"
 }
